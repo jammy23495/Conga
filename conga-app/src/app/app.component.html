@@ -1,0 +1,17 @@
+<h1 style="text-align: center;">Conga Interview Assignment</h1>
+<hr>
+<h3 style="text-align: center;">Here is the declared array - [{{arr}}]</h3>
+<div style="text-align: center;">
+  <button style="margin: 10px;font-size: 18px;" [hidden]="showInflectionButton" (click)="getInflectionPoint()">Get
+    Inflection Point</button>
+  <button style="margin: 10px;font-size: 18px;" [hidden]="showInflectionButton" (click)="getInflectionPoint()">Get
+    Maximum Price Drop</button>
+</div>
+<br />
+<br />
+<hr>
+<h2 style="text-align: center;"><u>Results</u></h2>
+<h4 [hidden]="!showInflectionLabel" style="text-align: center;">Inflection Point is <b>{{inflectionPoint}}</b> and Value is <b>{{inflectionValue}}</b></h4>
+<br/>
+<h4 style="text-align: center;" [hidden]="showInflectionLabel">No results found!</h4>
+<router-outlet></router-outlet>
