@@ -4,19 +4,30 @@
 <div style="text-align: center;">
   <button style="margin: 10px;font-size: 18px;" [hidden]="showInflectionButton" (click)="getInflectionPoint()">Get
     Inflection Point</button>
-  <button style="margin: 10px;font-size: 18px;" [hidden]="showInflectionButton" (click)="getInflectionPoint()">Get
+  <button style="margin: 10px;font-size: 18px;" [hidden]="showPriceDropButton" (click)="getPriceDrop()">Get
     Maximum Price Drop</button>
 </div>
 <br />
 <br />
 <hr>
 <h2 style="text-align: center;"><u>Results</u></h2>
-<h4 [hidden]="!showInflectionLabel" style="text-align: center;">Inflection Point is <b>{{inflectionPoint}}</b> and Value
-  is <b>{{inflectionValue}}</b></h4>
-<div [hidden]="!showInflectionLabel" style="text-align: center;">
-  <h4><b>Time Complexity</b> – O(n)</h4>
-  <h4><b>Auxiliary Space</b> – O(1)</h4>
+<div>
+  <h4 [hidden]="!showInflectionLabel" style="text-align: center;">Inflection Point is <b>{{inflectionPoint}}</b> and
+    Value
+    is <b>{{inflectionValue}}</b></h4>
+  <div [hidden]="!showInflectionLabel" style="text-align: center;">
+    <h4><b>Time Complexity</b> – O(n)</h4>
+    <h4><b>Auxiliary Space</b> – O(1)</h4>
+  </div>
+  <br />
 </div>
-<br />
-<h4 style="text-align: center;" [hidden]="showInflectionLabel">No results found!</h4>
+<div>
+  <h4 [hidden]="!showPriceDropLabel" style="text-align: center;">{{showPriceDropShowLabel}}</h4>
+  <div [hidden]="!showPriceDropLabel" style="text-align: center;">
+    <h4><b>Time Complexity</b> – O(n)</h4>
+    <h4><b>Auxiliary Space</b> – O(1)</h4>
+  </div>
+  <br />
+</div>
+<h4 style="text-align: center;" [hidden]="showInflectionLabel || showPriceDropLabel">No results found!</h4>
 <router-outlet></router-outlet>
