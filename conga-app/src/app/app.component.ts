@@ -1,5 +1,6 @@
 import {
-  Component, Input
+  Component,
+  Input
 } from '@angular/core';
 
 @Component({
@@ -9,7 +10,8 @@ import {
 })
 export class AppComponent {
   //Array Declaration
-  arr: number[] = [-7, 1, 5, 2, -4, 3, 0];
+  arr: number[] = [];
+  input: string = ""
 
   //Global variables for calculating inflection point
   sum: number = 0;
@@ -26,6 +28,21 @@ export class AppComponent {
   maximumDiff: number = 0
   minPrice: number = 0
   maxPrice: number = 0
+
+  getArray(input: string) {
+    this.input = input
+    //Converting string into number array
+    this.arr = input.split(',').map(function (item) {
+      return parseInt(item, 10);
+    });
+
+    //Validation numbers inside the array
+    this.arr = this.arr.filter(function (item) {
+      return (!isNaN(item));
+    });
+    console.log(this.arr)
+  }
+
 
   //Calculating the inflection point
   getInflectionPoint() {
@@ -63,7 +80,7 @@ export class AppComponent {
   getPriceDrop() {
     this.showPriceDropLabel = true;
     this.showPriceDropButton = true;
-    
+
     this.showInflectionLabel = false;
     this.showInflectionButton = false;
 
