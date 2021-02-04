@@ -1,5 +1,5 @@
 import {
-  Component
+  Component, Input
 } from '@angular/core';
 
 @Component({
@@ -9,7 +9,7 @@ import {
 })
 export class AppComponent {
   //Array Declaration
-  arr: number[] = [21, 19, 24, 32, 30, 31, 34, 31, 31, 26, 29];
+  arr: number[] = [-7, 1, 5, 2, -4, 3, 0];
 
   //Global variables for calculating inflection point
   sum: number = 0;
@@ -27,57 +27,45 @@ export class AppComponent {
   minPrice: number = 0
   maxPrice: number = 0
 
-  //Calculation Inflection Point
-  getInflectionPoint(): number {
+  //Calculating the inflection point
+  getInflectionPoint() {
     this.showInflectionLabel = true;
     this.showInflectionButton = true;
 
-    // Maintains left cumulative sum
-    this.leftsum = 0;
+    this.showPriceDropLabel = false;
+    this.showPriceDropButton = false;
 
-    // Maintains right cumulative sum
-    this.sum = 0;
-    let i: number = -1,
-      j: number = -1;
+    //Calculating the sum of the whole array
+    for (let i = 0; i < this.arr.length; i++) {
+      this.sum += this.arr[i];
+    }
 
-    let size: number = 0;
-    size = this.arr.length;
+    for (let i = 0; i < this.arr.length; i++) {
+      //Decrementing the right sum
+      this.sum -= this.arr[i];
 
-    for (i = 0, j = size - 1; i < j; i++, j--) {
+      //Incrementing the left sum
       this.leftsum += this.arr[i];
-      this.sum += this.arr[j];
 
-      // Keep moving i towards center until 
-      // left_sum is found lesser than right_sum
-      while (this.leftsum < this.sum && i < j) {
-        i++;
-        this.leftsum += this.arr[i];
-      }
-
-      // Keep moving j towards center until 
-      // right_sum is found lesser than left_sum
-      while (this.sum < this.leftsum && i < j) {
-        j--;
-        this.sum += this.arr[j];
+      //Comparing left and right sum
+      if (this.leftsum == this.sum) {
+        this.inflectionPoint = i;
+        this.inflectionValue = this.arr[i];
+        break;
+      } else {
+        this.inflectionPoint = -1;
+        this.inflectionValue = -1;
       }
     }
-    if (this.leftsum == this.sum) {
-      this.inflectionPoint = i;
-      this.inflectionValue = this.arr[i];
-      return i;
-    } else {
-      this.inflectionPoint = -1;
-      this.inflectionValue = -1;
-      return -1;
-    }
-
   }
 
-  //Calculating Price drop
+  //Calculationg the maximum price drop
   getPriceDrop() {
-
     this.showPriceDropLabel = true;
     this.showPriceDropButton = true;
+    
+    this.showInflectionLabel = false;
+    this.showInflectionButton = false;
 
     for (let i = 0; i < this.arr.length; i++) {
       for (let k = i + 1; k < this.arr.length; k++) {
